@@ -14,7 +14,7 @@ export const useLocalStorage = (text) => {
     }
 
     const getItem = () => {
-        setToken(() => localStorage.getItem('token') ?? text)
+        setToken(() => localStorage.getItem('token') ?? '')
     }
 
     return [token, {
