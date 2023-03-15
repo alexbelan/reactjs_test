@@ -6,7 +6,7 @@ export const useFetch = (url) => {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(false)
 
-    const refetch = (params) => {
+    const refetch = (params = {}) => {
         setIsLoading(true)
         setError(false)
         axios.get(url, params).then(res => {
@@ -20,7 +20,7 @@ export const useFetch = (url) => {
     }
 
     useEffect(() => {
-        refetch({})
+        refetch()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
