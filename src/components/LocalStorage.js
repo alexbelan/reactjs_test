@@ -2,11 +2,7 @@ import { useEffect } from "react";
 import { useLocalStorage } from "../hooks/localStorage";
 
 function LocalStorage() {
-  const [token, { setItem, removeItem }] = useLocalStorage();
-
-  useEffect(() => {
-    setItem('token')
-  }, [])
+  const [token, { setItem, removeItem }] = useLocalStorage('token');
 
   return (
     <div>
