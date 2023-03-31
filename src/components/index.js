@@ -1,17 +1,9 @@
-import Hover from "./Hover"
-import LocalStorage from "./LocalStorage"
-import Posts from "./Posts"
-import ViewportSize from "./ViewportSize"
-import WindowScroll from "./WindowScroll"
+import Form from "./Form"
 
 const Components = () => {
     return (
         <>
-            <Posts />
-            <LocalStorage />
-            <Hover />
-            <ViewportSize />
-            <WindowScroll />
+           <Form />
         </>
     )
 }
