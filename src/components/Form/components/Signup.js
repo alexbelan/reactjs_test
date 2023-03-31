@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import { TextInput, Radio, Group } from '@mantine/core';
+import { IconAt } from '@tabler/icons-react';
+
+const baseValues = {
+    name: '',
+    nick: '',
+    email: '',
+    gender: '',
+    password: '',
+    password2: ''
+}
 
 const Signup = () => {
-    const [values, setValues] = useState({})
+    const [values, setValues] = useState(baseValues)
 
     const handleChange = (event) => {
         setValues(prev => ({...prev, [event.target.name]: event.target.value}))
@@ -15,47 +25,43 @@ const Signup = () => {
     }
 
     const reset = () => {
-        setValues({})
+        setValues(baseValues)
     }
 
     return (
         <form 
             onSubmit={handleSubmit}
-            onChange={handleChange}
         >
             <TextInput
                 type="text"
                 placeholder="Your name"
                 name='name'
-                defaultValue={''}
+                onChange={handleChange}
                 value={values.name}
                 label="Name"
-                withAsterisk
             />
             <TextInput
                 type="text"
-                placeholder="Your login"
-                name='login'
-                defaultValue={''}
-                value={values.login}
-                label="Login"
-                withAsterisk
+                placeholder="Your nick"
+                name='nick'
+                icon={<IconAt size="0.8rem" />}
+                onChange={handleChange}
+                value={values.nick}
+                label="Nick"
             />
             <TextInput
                 type="email"
                 placeholder="Your email"
                 name='email'
-                defaultValue={''}
+                onChange={handleChange}
                 value={values.email}
                 label="Email"
-                withAsterisk
             />
             <Radio.Group
                 name="gender"
-                defaultValue=''
+                onChange={(e) => setValues(prev => ({...prev, gender: e}))}
                 value={values.gender}
                 label="Select gender"
-                withAsterisk
             >
                 <Group mt="xs">
                     <Radio value="man" label="Man" />
@@ -66,19 +72,17 @@ const Signup = () => {
                 type="password"
                 placeholder="Your password"
                 name='password'
-                defaultValue={''}
+                onChange={handleChange}
                 value={values.password}
                 label="Password"
-                withAsterisk
             />
             <TextInput
                 type="password"
                 placeholder="Your repit password"
                 name='password2'
-                defaultValue={''}
+                onChange={handleChange}
                 value={values.password2}
                 label="Repit password"
-                withAsterisk
             />
             <button type='submit'>Submit</button>
         </form>
