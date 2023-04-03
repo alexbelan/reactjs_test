@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { TextInput, Radio, Group } from '@mantine/core';
-import { IconAt } from '@tabler/icons-react';
+import {  Radio, Group } from '@mantine/core';
+import { HiUser } from "react-icons/hi";
+import InputText from './InputText';
 
 const baseValues = {
     name: '',
@@ -11,7 +12,7 @@ const baseValues = {
     password2: ''
 }
 
-const Signup = () => {
+const Signup = ({onSubmit}) => {
     const [values, setValues] = useState(baseValues)
 
     const handleChange = (event) => {
@@ -20,7 +21,7 @@ const Signup = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log('values', values)
+        onSubmit(values)
         reset()
     }
 
@@ -32,7 +33,7 @@ const Signup = () => {
         <form 
             onSubmit={handleSubmit}
         >
-            <TextInput
+            <InputText
                 type="text"
                 placeholder="Your name"
                 name='name'
@@ -40,16 +41,16 @@ const Signup = () => {
                 value={values.name}
                 label="Name"
             />
-            <TextInput
+            <InputText
                 type="text"
                 placeholder="Your nick"
                 name='nick'
-                icon={<IconAt size="0.8rem" />}
+                prefix={<HiUser />}
                 onChange={handleChange}
                 value={values.nick}
                 label="Nick"
             />
-            <TextInput
+            <InputText
                 type="email"
                 placeholder="Your email"
                 name='email'
@@ -57,18 +58,17 @@ const Signup = () => {
                 value={values.email}
                 label="Email"
             />
-            <Radio.Group
-                name="gender"
-                onChange={(e) => setValues(prev => ({...prev, gender: e}))}
-                value={values.gender}
-                label="Select gender"
-            >
-                <Group mt="xs">
-                    <Radio value="man" label="Man" />
-                    <Radio value="woman" label="Woman" />
-                </Group>
-            </Radio.Group>
-            <TextInput
+            <span>Gender</span>
+            <div>
+                <input type="radio" id="man" name="gender" value="man" onChange={handleChange} />
+                <label htmlFor="man">Man</label>
+            </div>
+
+            <div>
+                <input type="radio" id="woman" name="gender" value="woman" onChange={handleChange} />
+                <label htmlFor="woman">Woman</label>
+            </div>
+            <InputText
                 type="password"
                 placeholder="Your password"
                 name='password'
@@ -76,7 +76,7 @@ const Signup = () => {
                 value={values.password}
                 label="Password"
             />
-            <TextInput
+            <InputText
                 type="password"
                 placeholder="Your repit password"
                 name='password2'

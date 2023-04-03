@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { TextInput } from '@mantine/core';
+import InputText from './InputText';
 
 const baseValues = {
     email: '',
     password: '',
 }
 
-const Signin = () => {
+const Signin = ({onSubmit}) => {
     const [values, setValues] = useState(baseValues)
 
     const handleChange = (event) => {
@@ -15,6 +15,7 @@ const Signin = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        onSubmit(values)
         reset()
     }
 
@@ -26,16 +27,18 @@ const Signin = () => {
         <form 
             onSubmit={handleSubmit}
         >
-            <TextInput
+            <InputText
                 type="email"
+                isRequired
                 placeholder="Your email"
                 name='email'
                 onChange={handleChange}
                 value={values.email}
                 label="Email"
             />
-            <TextInput
+            <InputText
                 type="password"
+                isRequired
                 placeholder="Your password"
                 name='password'
                 onChange={handleChange}

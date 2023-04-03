@@ -3,6 +3,24 @@
   width: 50%;
 }
 
+.input { 
+  display: flex;
+  justify-content: flex-start;
+  border: grey solid 1px;
+  border-radius: 2px;  
+  padding: 10px 5px;
+}
+
+.input > input {
+  border: none;
+  width: 100%;
+  outline: none;
+}
+
+.input > input:focus {
+  outline: none;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

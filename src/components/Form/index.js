@@ -3,11 +3,15 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 
 const Form = () => {
+    const handleSubmit = (values) => {
+        console.log('values', values)
+    }
+
     return (
         <>
-            <Signin />
+            <Signin onSubmit={handleSubmit} />
             <hr />
-            <Signup />
+            <Signup onSubmit={handleSubmit} />
         </>
     )
 }
