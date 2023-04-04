@@ -28,6 +28,7 @@ const Signin = ({onSubmit}) => {
             onSubmit={handleSubmit}
         >
             <InputText
+                id={'emailPro'}
                 type="email"
                 isRequired
                 placeholder="Your email"
