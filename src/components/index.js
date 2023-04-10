@@ -1,9 +1,10 @@
-import Form from "./Form"
+import React from "react"
+import RouteTest from "./Route"
 
 const Components = () => {
     return (
         <>
-           <Form />
+           <RouteTest />
         </>
     )
 }

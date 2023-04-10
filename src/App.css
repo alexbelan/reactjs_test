@@ -21,6 +21,16 @@
   outline: none;
 }
 
+.route-nav > ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.route-nav > ul > li {
+  list-style-type: none;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
