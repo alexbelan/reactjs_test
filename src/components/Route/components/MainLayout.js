@@ -1,9 +1,13 @@
 import React from "react";
-import { NavLink, Outlet, useOutlet } from "react-router-dom"
+import { NavLink, Outlet, useNavigate, useOutlet } from "react-router-dom"
 import MainPage from "./MainPage";
+import { useAuth } from "../context/AuthProvider";
+import PrivateRoute from "./PrivateRoute";
 
 const MainLayout = () => {
     const outlet = useOutlet()
+    const auth = useAuth()
+    const navigate = useNavigate()
 
     return (
         <>
@@ -45,11 +49,23 @@ const MainLayout = () => {
                             Locations
                         </NavLink>
                     </li>
+                    {auth.user ? (
+                        <li>
+                            <button onClick={auth.signout}>
+                                logout
+                            </button>
+                        </li>
+                    ) : (
+                        <li>
+                            <button onClick={() => navigate('/login')}>
+                                login
+                            </button>
+                        </li>
+                    )}
                 </ul>
             </nav>
             <main>
-                {outlet === null && <MainPage />}
-                <Outlet />
+                {outlet === null ? <MainPage /> : <PrivateRoute><Outlet /></PrivateRoute> }
             </main>
         </>
     )

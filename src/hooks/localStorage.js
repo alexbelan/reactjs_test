@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export const useLocalStorage = (text) => {
-    const [token, setToken] = useState(text)
+    const [token, setToken] = useState(text ? text : '')
 
     const setItem = (newToken) => {
         setToken(newToken)
