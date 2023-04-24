@@ -1,25 +1,30 @@
-import React, { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
-import locationJSON from '../data/location.json';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
+import { useFetch } from '../../../hooks/fetch';
 
 
 const PostLocation = () => {
-    let {id} = useParams()
-
-    const data = useMemo(() => {
-        return locationJSON.find(item => item.id === +id)
-    }, [id])
+    let location = useLocation();
+    const {
+        data,
+        isLoading,
+        error
+    } = useFetch('https://rickandmortyapi.com/api' + location.pathname)
 
     return (
         <>
-            {!!data ? (<>
+            {isLoading && 
+                <p>...Loading</p>
+            }
+            {error && <ErrorPage />}
+            {!!data && (<>
                 <h2>{data.name}</h2>
                 <ul>
                     <li>Type: {data.type || '-'}</li>
                     <li>Dimension: {data.dimension || '-'}</li>
                 </ul>
-            </>) : (<ErrorPage />)}
+            </>)}
             
         </>
     )

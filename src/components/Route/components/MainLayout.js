@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { NavLink, Outlet, useNavigate, useOutlet } from "react-router-dom"
-import MainPage from "./MainPage";
 import { useAuth } from "../context/AuthProvider";
 import PrivateRoute from "./PrivateRoute";
+
+const MainPage = lazy(() => import('./MainPage'))
 
 const MainLayout = () => {
     const outlet = useOutlet()
@@ -23,7 +24,7 @@ const MainLayout = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to='/characters' style={({ isActive }) => {
+                        <NavLink to='/character' style={({ isActive }) => {
                             return {
                                 color: isActive ? "red" : "black",
                             };
@@ -65,7 +66,17 @@ const MainLayout = () => {
                 </ul>
             </nav>
             <main>
-                {outlet === null ? <MainPage /> : <PrivateRoute><Outlet /></PrivateRoute> }
+                {outlet === null ? (
+                    <Suspense fallback={'Loading...'}>
+                        <MainPage />
+                    </Suspense>
+                    ) : (
+                    <PrivateRoute>
+                        <Suspense fallback={'Loading...'}>
+                            <Outlet />
+                        </Suspense>
+                    </PrivateRoute>)
+                }
             </main>
         </>
     )
